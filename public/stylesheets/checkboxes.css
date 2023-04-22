@@ -1,0 +1,49 @@
+.form-check{
+  display:none;
+}
+
+.label-img {
+border: 1px solid #fff;
+display: block;
+position: relative;
+cursor: pointer; 
+}
+
+.label-img:before {
+background-color: white;
+color: white;
+content: " ";
+display: block;
+border-radius: 50%;
+border: 1px solid grey;
+position: absolute;
+top: -5px;
+left: -5px;
+width: 25px;
+height: 25px;
+text-align: center;
+line-height: 28px;
+transition-duration: 0.4s;
+transform: scale(0);
+}
+
+.label-img img {
+transition-duration: 0.2s;
+transform-origin: 50% 50%;
+}
+
+:checked + .label-img {
+border-color: #ddd;
+}
+
+:checked + .label-img:before {
+content: "✓";
+background-color: rgb(0, 98, 255);
+transform: scale(1);
+}
+
+:checked + .label-img img {
+transform: scale(0.9);
+box-shadow: 0 0 5px #333;
+z-index: -1;
+}

@@ -1,0 +1,29 @@
+<nav class="navbar sticky-top navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Collegrity</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/colleges">Colleges</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/colleges/new">New College</a>
+        </li>
+      </ul>
+      <div class="navbar-nav ml-auto">
+        <% if (! currentUser){ %>
+        <a class="nav-link" href="/Register">Register</a>
+        <a class="nav-link" href="/login">Login</a>
+        <% }else {%>
+        <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

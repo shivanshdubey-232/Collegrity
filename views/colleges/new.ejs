@@ -1,0 +1,49 @@
+<% layout('layout/boilerplate') %>
+
+</style>
+<div class="row">
+    <div class="col-6 offset-3"> 
+        <h1 class="text-center"> Add new College</h1>
+        <form action="/colleges" method="POST" novalidate class="validated-form" enctype = "multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">College name</label>
+                <input class="form-control" type="text" id="title" name="college[title]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="college[location]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" rows="6" type="text" id="description" name="college[description]" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <h5 class="text-muted">
+                    Add images
+                </h5>
+                <div class="form-file custom-file">
+                    <input type="file" class="form-file-input" id="image" name="image" multiple>
+                    <label class="form-file-label" for="image">
+                        <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                        <span class="form-file-button"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success ">Add college</button>
+            </div>
+        </form>
+        <a href="/colleges">All colleges</a>
+    </div>
+</div>

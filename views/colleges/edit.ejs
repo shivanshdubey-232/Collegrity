@@ -1,0 +1,66 @@
+<% layout('layout/boilerplate')%>
+
+<!-- <link rel="stylesheet" href="/stylesheets/checkboxes.css"> -->
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1 class="text-center">Edit college</h1>
+        <form action="/colleges/<%=college._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype = "multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">College Name</label>
+                <input class="form-control" type="text" id="title" name="college[title]"
+                    value="<%=college.title %>" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="college[location]"
+                    value="<%=college.location %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" rows="6" id="description" name="college[description]"  required><%= college.description%></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            
+            
+            <div class="mb-3">
+                <h5 class="text-muted">
+                    Add images
+                </h5>
+                <div class="form-file custom-file">
+                    <input type="file" class="form-file-input" id="image" name="image" multiple>
+                    <label class="form-file-label" for="image">
+                        <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                        <span class="form-file-button"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <h5 class="mb-3 text-muted">Check images to delete</h5>
+                <% college.images.forEach(function(img, i){ %>
+                    <div class="form-check-inline">
+                        <input type="checkbox" class="form-check" id='<%= img.url %>' name="deleteImages[]" value="<%= img.filename %>"/>
+                        <label for="<%= img.url %>">
+                            <img src="<%= img.thumbnail %>" class="img-thumbnail" height="100">
+                        </label>
+                    </div>
+                    
+                <% }) %>
+            </div>
+            <div class="container mb-3">
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-info">Update College</button>
+                    </div>
+                    <div class="col-6">
+                        <a href="/colleges/<%=college._id%>" class="btn btn-success ">Back to College</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

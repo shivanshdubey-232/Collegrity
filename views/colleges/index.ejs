@@ -1,0 +1,46 @@
+<% layout('layout/boilerplate') %>
+<div class="mt-0 "id="map" style="width: 100%; height: 500px"></div>
+
+ <h1>All colleges</h1>
+ <script>
+     AOS.init();
+</script>
+<% for (let college of colleges){%>
+    <div class="card my-4"  data-aos="zoom-in">
+        <div class="row">
+            <div class="col-md-4">
+                <% if(college.images.length) {%>
+                    <img class="img-fluid"src="<%= college.images[0].url %>" alt="" class="img-fluid" style="width:100%; height:100%, max-height:300px">
+                    <% } else{ %>
+                        <img src="https://res.cloudinary.com/dp22k1vwj/image/upload/v1681793386/samples/landscapes/beach-boat.jpg" style="max-width:100%">
+                        <% } %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                    <h5 class="card-title"><%= college.title %></h5>
+                    <p class="card-text"><%= college.description %></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <%= college.location %>
+                        </small>
+                    </p>
+                    <a href="/colleges/<%= college._id %>" class="btn btn-primary">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }%>
+    <div>
+       <!-- add college button -->
+       <% if(currentUser) {%>
+           <a href="/colleges/new" class="btn btn-success my-3">+Add College</a>
+       <% } %>
+    </div>
+    
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const colleges = {features: <%- JSON.stringify(colleges) %>};
+    </script>
+<script src="/javascripts/clusterMap.js"></script>
