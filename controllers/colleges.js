@@ -3,7 +3,6 @@ const {cloudinary} = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({accessToken: mapBoxToken});
-
 module.exports.index = async (req, res) => { 
   const colleges = await College.find({});
   res.render('colleges/index', { colleges })
