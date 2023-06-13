@@ -8,6 +8,17 @@
     <link rel="shortcut icon" href="icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <!-- AOS Package -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+    <!-- Home css -->
     <link rel="stylesheet" href="/stylesheets/home.css">
 </head>
 
@@ -16,7 +27,7 @@
         <header class="mb-auto">
             <div>
                 <img class=" float-md-left " style="position: relative; top:0;"src="icon.png" alt="" width="45px" height="38px">
-                <h3 class="float-md-left mb-0 mx-3" style="position:sticky;">Collegrity</h3>
+                <h3 class="integrity float-md-left mb-0 mx-3" style="position:sticky;">Collegrity</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                     <a class="nav-link" href="/colleges">Colleges</a>
@@ -29,8 +40,8 @@
                 </nav>
             </div>
         </header>
-        <main class="px-3 text-center">
-            <h1>Collegrity</h1>
+        <main class="px-3 text-center" data-aos="zoom-in">
+            <h1 class="integrity">Collegrity</h1>
             <p class="lead">Discover your dream college with Collegrity!
                 <br> Your trusted source for college reviews and ratings. <br>
             </p>
@@ -52,6 +63,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
         integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
         crossorigin="anonymous"></script>
+    <!-- AOS initialization -->
+    <script>
+        AOS.init({
+        duration: 1200,
+        })
+    </script>
 </body>
-
 </html>

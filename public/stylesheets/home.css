@@ -11,6 +11,12 @@ body {
 max-width: 60vw;
 }
 
+*{
+  font-family: 'PT Serif', serif;
+}
+.integrity{
+  font-family: 'Playfair Display', serif;
+}
 .nav-link {
   padding: 0.25rem 0;
   font-weight: 700;

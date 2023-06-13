@@ -1,12 +1,12 @@
 <% layout('layout/boilerplate') %>
-<div class="mt-0 "id="map" style="width: 100%; height: 500px"></div>
+<div class="my-5" id="map" style="width: 100%; height: 500px;"></div>
 
  <h1>All colleges</h1>
  <script>
      AOS.init();
 </script>
 <% for (let college of colleges){%>
-    <div class="card my-4"  data-aos="zoom-in">
+    <div class="card my-4"  data-aos="zoom-in" style="box-shadow: rgba(14, 14, 102, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;">
         <div class="row">
             <div class="col-md-4">
                 <% if(college.images.length) {%>

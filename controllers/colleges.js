@@ -35,7 +35,14 @@ module.exports.showcollege = async (req, res,) => {
     req.flash('error', 'Cannot find any college !');
     return res.redirect('/colleges');
   }
-  res.render('colleges/show', { college, msg: req.flash("success")  });
+  // calculate average review rating
+  let avgRating = 0;
+  if(college.reviews.length){
+    const ratings = college.reviews.map(review => review.rating);
+    avgRating = ratings.reduce((acc, cur) => acc + cur) / ratings.length;
+  }
+  avgRating = avgRating.toFixed(1);
+  res.render('colleges/show', { college, msg: req.flash("success"), avgRating});
 }
 
 module.exports.renderEditForm = async (req, res) => {

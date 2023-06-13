@@ -1,0 +1,14 @@
+*{
+  font-family: 'PT Serif', serif;
+}
+.integrity{
+  font-family: 'Playfair Display', serif;
+}
+.btn-primary{
+  margin:1em;
+  background-color: rgba(57, 43, 182, 0.934);
+  float: right;
+}
+.btn-primary:hover{
+  background-color: rgb(57, 43, 182);
+}

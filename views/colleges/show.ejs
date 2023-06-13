@@ -47,6 +47,7 @@
 </div>
 <div class="col-6">
     <div id='map' style='width: 100%; height: 300px;'></div>
+    <h2>Average Rating : <%= avgRating %></h2>
     <% if(currentUser) {%>
     <h2>Leave a Review </h2>
     <form action="/colleges/<%= college._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
@@ -91,6 +92,8 @@
         <% } %>
         
     </div>
+    <% } else{%>
+        <h4 class="text-center my-4">Sign in to take look at detailed reviews !</h4>
     <% } %>
 </div>
 
