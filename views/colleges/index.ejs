@@ -1,15 +1,15 @@
 <% layout('layout/boilerplate') %>
-<div class="my-5" id="map" style="width: 100%; height: 500px;"></div>
+<div class="my-5" id="map" data-aos="zoom-out"></div>
 <hr>
-<form action="/colleges/search" method="GET" novalidate class="validated-form" enctype = "multipart/form-data">
-    <div class="input-group mb-3 mx-auto p-1" style="max-width: 600px;" >
+<form action="/colleges/search" method="GET" novalidate class="validated-form" enctype = "multipart/form-data" data-aos="flip-left">
+    <div class="input-group search-college mb-3 mx-auto p-1" style="max-width: 600px;" >
         <input type="text" class="form-control" placeholder="Search colleges" aria-label="Search Colleges" aria-describedby="basic-addon2" id="collegeName" name="collegeName">
         <div class="input-group-append">
                 <button class="btn btn-outline-secondary" ><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
     </div> 
 </form>
-
+<br>
 <script>
     AOS.init();
 </script>
