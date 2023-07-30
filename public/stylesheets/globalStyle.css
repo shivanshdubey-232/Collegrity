@@ -3,7 +3,9 @@ body{
   color: white;
 }
 .navbar{
-  background-image: linear-gradient(to right, #2b2b2b, #000000);
+  background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  /* background-image: linear-gradient(to right, #2b2b2b, #000000);
+  background-image: linear-gradient(to right, #2b2b2b, #000000); */
 }
 .nav-link{
   transition-duration: 0.5s;
