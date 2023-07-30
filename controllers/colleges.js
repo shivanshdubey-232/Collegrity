@@ -1,6 +1,7 @@
 const College = require('../models/college');
 const {cloudinary} = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const { string } = require('joi');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 module.exports.index = async (req, res) => { 
@@ -10,6 +11,15 @@ module.exports.index = async (req, res) => {
 module.exports.renderNewForm = (req, res) => {
   res.render('colleges/new');
 }
+
+module.exports.searchColleges = async (req, res) => {
+  const searchQuery = req.query.collegeName;
+  console.log(searchQuery);
+  const regex = new RegExp(searchQuery, 'i');
+  const colleges = await College.find({ title: { $regex: regex } });
+  res.render("colleges/search", {colleges}); 
+}
+
 module.exports.createNewcollege = async (req, res, next) => {
   const geoData = await geocoder.forwardGeocode({
     query: req.body.college.location,
@@ -42,7 +52,8 @@ module.exports.showcollege = async (req, res,) => {
     avgRating = ratings.reduce((acc, cur) => acc + cur) / ratings.length;
   }
   avgRating = avgRating.toFixed(1);
-  res.render('colleges/show', { college, msg: req.flash("success"), avgRating});
+  const stringPercentage = "width:" + (avgRating * 20).toString() + "%";
+  res.render('colleges/show', { college, msg: req.flash("success"), avgRating, stringPercentage});
 }
 
 module.exports.renderEditForm = async (req, res) => {

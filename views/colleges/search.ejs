@@ -1,21 +1,18 @@
 <% layout('layout/boilerplate') %>
 <div class="my-5" id="map" style="width: 100%; height: 500px;"></div>
 <hr>
-<form action="/colleges/search" method="GET" novalidate class="validated-form" enctype = "multipart/form-data">
-    <div class="input-group mb-3 mx-auto p-1" style="max-width: 600px;" >
-        <input type="text" class="form-control" placeholder="Search colleges" aria-label="Search Colleges" aria-describedby="basic-addon2" id="collegeName" name="collegeName">
-        <div class="input-group-append">
-                <button class="btn btn-outline-secondary" ><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-    </div> 
-</form>
-
+<h1>Search results</h1>
 <script>
     AOS.init();
 </script>
 
 <a class="back-to-top"></a>
 
+<% if(colleges.length === 0){%>
+    <div class="text-center">
+        <h1>No colleges found :(</h1>
+    </div>
+<% } %>
 <% for (let college of colleges){%>
     
     <div class="card my-4"  data-aos="zoom-in" style="box-shadow: rgba(14, 14, 102, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;">

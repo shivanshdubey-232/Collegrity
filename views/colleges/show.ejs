@@ -47,7 +47,13 @@
 </div>
 <div class="col-6">
     <div id='map' style='width: 100%; height: 300px;'></div>
-    <h2>Average Rating : <%= avgRating %></h2>
+    <br>
+    
+    <div class="ratings">
+        <div class="empty-stars"></div>
+        <div class="full-stars" style=<%= stringPercentage %>></div>
+        4.3 stars and <%= college.reviews.length %> ratings 
+    </div>
     <% if(currentUser) {%>
     <h2>Leave a Review </h2>
     <form action="/colleges/<%= college._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
@@ -103,5 +109,4 @@
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const college = <%- JSON.stringify(college) %>
 </script>
-
 <script src="/javascripts/showPageMap.js"></script>

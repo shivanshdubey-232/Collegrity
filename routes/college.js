@@ -11,8 +11,10 @@ const upload = multer({storage});
 router.route('/')
   .get(catchAsync(colleges.index))
   .post(isLoggedIn, upload.array('image'), validatecollege,catchAsync(colleges.createNewcollege));
-  
+
 router.get('/new', isLoggedIn, colleges.renderNewForm);
+
+router.get('/search', colleges.searchColleges);
 
 router.route('/:id')
   .get(catchAsync(colleges.showcollege))
