@@ -16,7 +16,11 @@ module.exports.searchColleges = async (req, res) => {
   const searchQuery = req.query.collegeName;
   console.log(searchQuery);
   const regex = new RegExp(searchQuery, 'i');
-  const colleges = await College.find({ title: { $regex: regex } });
+  const colleges = await College.find({ $or: [
+    { title: { $regex: regex } },
+    { description: { $regex: regex } },
+  ]});
+
   res.render("colleges/search", {colleges}); 
 }
 
