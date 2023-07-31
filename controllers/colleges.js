@@ -56,8 +56,24 @@ module.exports.showcollege = async (req, res,) => {
     avgRating = ratings.reduce((acc, cur) => acc + cur) / ratings.length;
   }
   avgRating = avgRating.toFixed(1);
-  const stringPercentage = "width:" + (avgRating * 20).toString() + "%";
-  res.render('colleges/show', { college, msg: req.flash("success"), avgRating, stringPercentage});
+  const totalPercentage = avgRating * 20;
+  const starArray = [];
+  for(let i = 1; i <= 5; i++){
+    if(i <= avgRating){
+        starArray.push("width: 100%");
+    }
+    else{
+      if(i - avgRating <= 1){
+        const rem = (100 - (i - avgRating) * 100);
+        starArray.push("width: " + rem + "%");
+      }
+      starArray.push("width: 0%");
+    }
+  }
+  for(let i = 0; i < starArray.length; i++){
+    console.log(starArray[i]);
+  }
+  res.render('colleges/show', { college, msg: req.flash("success"), avgRating, starArray});
 }
 
 module.exports.renderEditForm = async (req, res) => {
