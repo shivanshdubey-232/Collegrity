@@ -57,12 +57,13 @@ module.exports.showcollege = async (req, res,) => {
 
   async function fetchSentiment(i){
     try{
-      response = await axios.get("https://sentiment-app-fgxu.onrender.com/sentiment/", { 
+      response = await axios.get("http://127.0.0.1:9000/sentiment/", { 
         params :{sentence: college.reviews[i].body} 
       });
       // console.log(parseFloat(response.data.compound))
-      totSentiments = totSentiments + parseFloat(response.data.compound);
-      sentimentArray.push((parseFloat(response.data.compound)*100).toFixed(2));
+      let calcScore = (parseFloat(response.data.compound) + 1) * 50;
+      totSentiments = totSentiments + calcScore;
+      sentimentArray.push((calcScore).toFixed(2));
     }
     catch(error){
       console.error('Error:', error.message);
@@ -73,7 +74,7 @@ module.exports.showcollege = async (req, res,) => {
   } 
   // console.log(sentimentArray)
   // calculate average sentiments --------------------------------------
-  let avgSentiment = totSentiments / college.reviews.length * 100;
+  let avgSentiment = totSentiments / college.reviews.length ;
   avgSentiment = avgSentiment.toFixed(2);
   // console.log(avgSentiment);
   // calculate average review rating-----------------------------------
