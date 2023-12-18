@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-6" style="max-height: 800px; overflow-y: scroll;">
     <div id='map' style='width: 100%; height: 300px;'></div>
     <br>
     
@@ -68,7 +68,9 @@
               </i>
         </div>
         <span class="text-muted" style="font-size: 1.1em;">
-            <%= avgRating %> stars and <%= college.reviews.length %> ratings 
+            <%= avgRating %> stars and <%= college.reviews.length %> ratings
+            <br>
+            Collegrity Score: <%= avgSentiment %>  
         </span>
     </div>
     <% if(currentUser) {%>
@@ -97,16 +99,48 @@
         </div>
         <button class="btn btn-success mb-3">Submit</button>
     </form>
-    <% for(let review of college.reviews){ %>
+    <% for(let i = 0; i < college.reviews.length; i ++){ %>
         <div class="mb-3 card ">
             <div class="card-body">
-                <h5 class="card-subtitle mb-2 text-muted"> <%= review.author.username %></h5>
-                <p class="starability-result" data-rating="<%=review.rating%>">
-                    Rated: <%= review.rating %> stars
+                <h5 class="card-subtitle mb-2 text-muted"> <%= college.reviews[i].author.username %></h5>
+                <p class="starability-result" data-rating="<%=college.reviews[i].rating%>">
+                    Rated: <%= college.reviews[i].rating %> stars
                 </p>
-                <p class="card-text"> Review : <%= review.body %> </p>
-                <% if(currentUser && review.author.equals(currentUser)) {%>
-                <form action="/colleges/<%= college._id%>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                <p class="card-text">  <%= college.reviews[i].body %> </p>
+                <p class="text-muted">Sentiment Score: <%= sentimentArray[i] %></p>
+                <% if(college.reviews[i].rating <= 2 && sentimentArray[i] >=80) {%>
+                    <p class="text-danger">Potentially misleading review ! 
+                        <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal">
+                            <!-- Info button icon svg -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#892323" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                            
+                        </button>
+                        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Potentially misleading review</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  A misalignment exists between the star rating and sentiment of the review as examined by our machine learning model. <br>
+                                  Viewers should be cautious, as such inaccuracies can lead to misguided decisions. 
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </p>
+                <% } %>
+                <% if(currentUser && college.reviews[i].author.equals(currentUser)) {%>
+                <form action="/colleges/<%= college._id%>/reviews/<%= college.reviews[i]._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </form>
                 <% } %>

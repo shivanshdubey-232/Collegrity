@@ -1,3 +1,4 @@
+const axios = require('axios');
 const College = require('../models/college');
 const {cloudinary} = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -49,14 +50,39 @@ module.exports.showcollege = async (req, res,) => {
     req.flash('error', 'Cannot find any college !');
     return res.redirect('/colleges');
   }
-  // calculate average review rating
+
+  // calculate individual sentiments-----------------------------------
+  let sentimentArray=[];
+  let totSentiments = 0;
+
+  async function fetchSentiment(i){
+    try{
+      response = await axios.get("https://sentiment-app-fgxu.onrender.com/sentiment/", { 
+        params :{sentence: college.reviews[i].body} 
+      });
+      // console.log(parseFloat(response.data.compound))
+      totSentiments = totSentiments + parseFloat(response.data.compound);
+      sentimentArray.push((parseFloat(response.data.compound)*100).toFixed(2));
+    }
+    catch(error){
+      console.error('Error:', error.message);
+    }
+  };
+  for(let i = 0; i < college.reviews.length; i++){
+    await fetchSentiment(i);
+  } 
+  // console.log(sentimentArray)
+  // calculate average sentiments --------------------------------------
+  let avgSentiment = totSentiments / college.reviews.length * 100;
+  avgSentiment = avgSentiment.toFixed(2);
+  // console.log(avgSentiment);
+  // calculate average review rating-----------------------------------
   let avgRating = 0;
   if(college.reviews.length){
     const ratings = college.reviews.map(review => review.rating);
     avgRating = ratings.reduce((acc, cur) => acc + cur) / ratings.length;
   }
   avgRating = avgRating.toFixed(1);
-  const totalPercentage = avgRating * 20;
   const starArray = [];
   for(let i = 1; i <= 5; i++){
     if(i <= avgRating){
@@ -70,10 +96,7 @@ module.exports.showcollege = async (req, res,) => {
       starArray.push("width: 0%");
     }
   }
-  for(let i = 0; i < starArray.length; i++){
-    console.log(starArray[i]);
-  }
-  res.render('colleges/show', { college, msg: req.flash("success"), avgRating, starArray});
+  res.render('colleges/show', { college, msg: req.flash("success"), avgRating, starArray, sentimentArray, avgSentiment});
 }
 
 module.exports.renderEditForm = async (req, res) => {

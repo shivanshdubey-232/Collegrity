@@ -1,7 +1,6 @@
 body {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-  url("https://th.bing.com/th/id/OIG.BSHLh6N7KVBPj_yd0B5_?pcl=1b1a19&pid=ImgGn");
+  background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
   background-size: cover;
   background-position: center;
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);

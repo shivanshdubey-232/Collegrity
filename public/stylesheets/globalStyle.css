@@ -87,6 +87,11 @@ body{
 .btn-primary:hover{
   background-color: rgb(57, 43, 182);
 }
+
+.modal-dialog{
+  color:#0e0429;
+  background-color: aliceblue;
+}
 footer{
   background-image: linear-gradient(to right, #2b2b2b, #000000);
   color: white;

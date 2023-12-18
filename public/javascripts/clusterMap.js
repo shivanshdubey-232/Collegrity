@@ -1,5 +1,5 @@
 
-	mapboxgl.accessToken = mapToken;
+mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
 container: 'map',
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -19,40 +19,36 @@ type: 'geojson',
 data: colleges,
 cluster: true,
 clusterMaxZoom: 14, // Max zoom to cluster points on
-clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
 });
  
 map.addLayer({
-id: 'clusters',
-type: 'circle',
-source: 'colleges',
-filter: ['has', 'point_count'],
-paint: {
-// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-// with three steps to implement three types of circles:
-//   * Blue, 20px circles when point count is less than 100
-//   * Yellow, 30px circles when point count is between 100 and 750
-//   * Pink, 40px circles when point count is greater than or equal to 750
-'circle-color': [
-'step',
-['get', 'point_count'],
-'#51bbd6',
-5,
-'#f1f075',
-10,
-'#f28cb1'
-],
-'circle-radius': [
-'step',
-['get', 'point_count'],
-20,
-100,
-30,
-750,
-40
-]
-}
+  id: 'clusters',
+  type: 'circle',
+  source: 'colleges',
+  filter: ['has', 'point_count'],
+  paint: {
+    'circle-color': [
+      'step',
+      ['get', 'point_count'],
+      '#51bbd6',
+      5,
+      '#f28cb1',
+      10,
+      '#f1f075',
+    ],
+    'circle-radius': [
+      'step',
+      ['get', 'point_count'],
+      10,  // Decreased radius for point_count less than 5
+      5,
+      15,  // Decreased radius for point_count between 5 and 10
+      10,
+      20  // Decreased radius for point_count greater than or equal to 10
+    ]
+  }
 });
+
  
 map.addLayer({
 id: 'cluster-count',
@@ -72,8 +68,8 @@ type: 'circle',
 source: 'colleges',
 filter: ['!', ['has', 'point_count']],
 paint: {
-'circle-color': '#11b4da',
-'circle-radius': 20,
+'circle-color': '#F7C05A',
+'circle-radius': 5,
 'circle-stroke-width': 1,
 'circle-stroke-color': '#fff'
 }
@@ -104,6 +100,7 @@ zoom: zoom
 // description HTML from its properties.
 map.on('click', 'unclustered-point', (e) => {
 const coordinates = e.features[0].geometry.coordinates.slice();
+
 const text = e.features[0].properties.popUpMarkup;
 const tsunami =
 e.features[0].properties.tsunami === 1 ? 'yes' : 'no';
