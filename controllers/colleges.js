@@ -57,7 +57,7 @@ module.exports.showcollege = async (req, res,) => {
 
   async function fetchSentiment(i){
     try{
-      response = await axios.get("http://127.0.0.1:9000/sentiment/", { 
+      response = await axios.get("https://sentiment-app-fgxu.onrender.com/sentiment/", { 
         params :{sentence: college.reviews[i].body} 
       });
       // console.log(parseFloat(response.data.compound))
